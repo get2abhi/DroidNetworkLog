@@ -28,7 +28,7 @@ LOCAL_MODULE:=libext
 # LOCAL_MODULE_CLASS must be defined before calling $(local-intermediates-dir)
 #
 LOCAL_MODULE_CLASS := STATIC_LIBRARIES
-MY_intermediates := $(call local-intermediates-dir)
+MY_intermediates := ../../../$(call LOCAL_PATH)
 
 # LOCAL_PATH needed because of dirty #include "blabla.c"
 LOCAL_C_INCLUDES:= \
@@ -92,7 +92,8 @@ LOCAL_MODULE:=libext4
 # LOCAL_MODULE_CLASS must be defined before calling $(local-intermediates-dir)
 #
 LOCAL_MODULE_CLASS := STATIC_LIBRARIES
-MY_intermediates := $(call local-intermediates-dir)
+MY_intermediates := ../../../$(call LOCAL_PATH)
+# $(call local-intermediates-dir)
 
 # LOCAL_PATH needed because of dirty #include "blabla.c"
 LOCAL_C_INCLUDES:= \
@@ -156,7 +157,8 @@ LOCAL_MODULE:=libext6
 # LOCAL_MODULE_CLASS must be defined before calling $(local-intermediates-dir)
 #
 LOCAL_MODULE_CLASS := STATIC_LIBRARIES
-MY_intermediates := $(call local-intermediates-dir)
+MY_intermediates := ../../../$(call LOCAL_PATH)
+# $(call local-intermediates-dir)
 
 # LOCAL_PATH needed because of dirty #include "blabla.c"
 LOCAL_C_INCLUDES:= \
