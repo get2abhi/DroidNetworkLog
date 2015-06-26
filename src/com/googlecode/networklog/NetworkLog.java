@@ -6,50 +6,43 @@
 
 package com.googlecode.networklog;
 
-import android.os.Bundle;
-import android.content.Intent;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.content.ServiceConnection;
-import android.content.ComponentName;
-import android.content.res.Resources;
-import android.os.Messenger;
-import android.os.RemoteException;
-import android.os.IBinder;
-import android.content.Context;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.widget.TextView;
-import android.widget.ToggleButton;
-import android.widget.CheckBox;
-import android.view.View;
-import android.view.LayoutInflater;
-import android.util.Log;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
-
+import android.app.AlertDialog;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-
-import com.viewpagerindicator.TitlePageIndicator;
-import com.viewpagerindicator.TitleProvider;
-
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.app.ActionBar;
-
-import java.util.Enumeration;
-import java.net.NetworkInterface;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.util.ArrayList;
-import java.io.File;
+import android.util.Log;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.TextView;
+import android.widget.ToggleButton;
 
 public class NetworkLog extends SherlockFragmentActivity {
   public static RetainInstanceData data = null;
@@ -116,7 +109,8 @@ public class NetworkLog extends SherlockFragmentActivity {
   public static NetworkLog instance;
 
   public static ServiceConnection connection = new ServiceConnection() {
-    public void onServiceConnected(ComponentName className, IBinder serv) {
+    @Override
+	public void onServiceConnected(ComponentName className, IBinder serv) {
       service = new Messenger(serv);
       isBound = true;
 
@@ -133,7 +127,8 @@ public class NetworkLog extends SherlockFragmentActivity {
       }
     }
 
-    public void onServiceDisconnected(ComponentName className) {
+    @Override
+	public void onServiceDisconnected(ComponentName className) {
       MyLog.d("Detached from service; setting isBound false");
       service = null;
       isBound = false;
@@ -226,7 +221,8 @@ public class NetworkLog extends SherlockFragmentActivity {
       running = false;
     }
 
-    public void run() {
+    @Override
+	public void run() {
       MyLog.d("Init begin");
       running = true;
 
@@ -243,7 +239,8 @@ public class NetworkLog extends SherlockFragmentActivity {
 
       if(startServiceAtStart && !isServiceRunning(context, NetworkLogService.class.getName())) {
         handler.post(new Runnable() {
-          public void run() {
+          @Override
+		public void run() {
             startService();
           }
         });
@@ -301,7 +298,7 @@ public class NetworkLog extends SherlockFragmentActivity {
     NetworkLogService.toastBlockedApps = new SelectToastApps().loadBlockedApps(this);
   }
 
-  private static class MyFragmentPagerAdapter extends FragmentPagerAdapter implements TitleProvider {
+	private static class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     Context context;
 
     public MyFragmentPagerAdapter(Context context, FragmentManager fm) {
@@ -309,16 +306,26 @@ public class NetworkLog extends SherlockFragmentActivity {
       this.context = context;
     }
 
-    @Override
-      public String getTitle(int index) {
-        switch(index) {
-          case PAGE_LOG:
-            return context.getResources().getString(R.string.tab_log);
-          case PAGE_APP:
-            return context.getResources().getString(R.string.tab_apps);
-        }
-        return "Unnamed";
-      }
+		@Override
+		public CharSequence getPageTitle(int position) {
+			switch (position) {
+			case PAGE_LOG:
+				return context.getResources().getString(R.string.tab_log);
+			case PAGE_APP:
+				return context.getResources().getString(R.string.tab_apps);
+			}
+			return "Unnamed";
+		}
+		// @Override
+		// public String getTitle(int index) {
+		// switch(index) {
+		// case PAGE_LOG:
+		// return context.getResources().getString(R.string.tab_log);
+		// case PAGE_APP:
+		// return context.getResources().getString(R.string.tab_apps);
+		// }
+		// return "Unnamed";
+		// }
 
     @Override
       public Fragment getItem(int index) {
@@ -439,8 +446,9 @@ public class NetworkLog extends SherlockFragmentActivity {
 
       viewPager.setAdapter(pagerAdapter);
 
-      TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.titles);
-      titleIndicator.setViewPager(viewPager);
+		// TitlePageIndicator titleIndicator = (TitlePageIndicator)
+		// findViewById(R.id.titles);
+		// titleIndicator.setViewPager(viewPager);
 
       viewPager.setCurrentItem(1);
 
@@ -751,13 +759,15 @@ public class NetworkLog extends SherlockFragmentActivity {
       .setCancelable(true)
       .setView(checkBoxView)
       .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int id) {
+        @Override
+		public void onClick(DialogInterface dialog, int id) {
           settings.setConfirmExit(!checkBox.isChecked());
           finish();
         }
       })
     .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
-      public void onClick(DialogInterface dialog, int id) {
+      @Override
+	public void onClick(DialogInterface dialog, int id) {
         dialog.cancel();
       }
     });
@@ -840,7 +850,8 @@ public class NetworkLog extends SherlockFragmentActivity {
   }
 
   static Runnable updateStatusRunner = new Runnable() {
-    public void run() {
+    @Override
+	public void run() {
       updateStatusText();
     }
   };
@@ -908,7 +919,8 @@ public class NetworkLog extends SherlockFragmentActivity {
   class StatusUpdater implements Runnable {
     boolean running = false;
     Runnable runner = new Runnable() {
-      public void run() {
+      @Override
+	public void run() {
         MyLog.d(2, "Updating statusText");
         NetworkLogService.updateLogfileString();
         updateStatusText();
@@ -919,7 +931,8 @@ public class NetworkLog extends SherlockFragmentActivity {
       running = false;
     }
 
-    public void run() {
+    @Override
+	public void run() {
       running = true;
       MyLog.d("Starting status updater " + this);
 
