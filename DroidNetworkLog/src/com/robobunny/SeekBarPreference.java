@@ -14,7 +14,8 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import com.googlecode.networklog.R;
+import io.github.bunnyblue.networklog.R;
+
 
 public class SeekBarPreference extends Preference implements OnSeekBarChangeListener {
 

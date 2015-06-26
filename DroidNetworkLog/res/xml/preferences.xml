@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:networklog="http://schemas.android.com/apk/res/com.googlecode.networklog">
+  xmlns:networklog="http://schemas.android.com/apk/res-auto">
   <PreferenceScreen android:title="@string/pref_general">
     <PreferenceCategory
       android:title="@string/pref_general">
@@ -145,7 +145,7 @@
         android:key="start_foreground"
         android:title="@string/pref_foreground_title"
         android:summary="@string/pref_foreground_summary" />
-      <com.googlecode.networklog.TwoLinesListPreference
+      <io.github.bunnyblue.networklog.TwoLinesListPreference
         android:defaultValue="0"
         android:key="log_method"
         android:title="@string/pref_log_method_title"

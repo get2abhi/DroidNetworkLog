@@ -1,16 +1,14 @@
 package com.jjoe64.graphview;
 
-import java.lang.Runnable;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
+import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -19,13 +17,15 @@ import android.view.ViewConfiguration;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.graphics.Rect;
 
 import com.jjoe64.graphview.compatible.ScaleGestureDetector;
 
-import com.googlecode.networklog.R;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import io.github.bunnyblue.networklog.R;
+
 
 /**
  * GraphView is a Android View for creating zoomable and scrollable graphs.
