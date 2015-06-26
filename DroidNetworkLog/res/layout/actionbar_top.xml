@@ -16,5 +16,5 @@
     android:layout_alignParentRight="true"
     android:textOn="@string/logging_on"
     android:textOff="@string/logging_off"
-    android:onClick="serviceToggle"/>
+  />
 </RelativeLayout>

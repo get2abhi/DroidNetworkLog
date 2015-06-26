@@ -640,7 +640,13 @@ public class NetworkLog extends FragmentActivity {
       }
 
       loggingButton = (ToggleButton) findViewById(R.id.actionbar_service_toggle);
+    loggingButton.setOnClickListener(new View.OnClickListener() {
 
+      @Override
+      public void onClick(View v) {
+        serviceToggle(v);
+      }
+    });
       if(isServiceRunning(this, NetworkLogService.class.getName())) {
         loggingButton.setChecked(true);
       } else {

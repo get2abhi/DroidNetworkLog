@@ -8,7 +8,9 @@ dependencies {
 android {
     compileSdkVersion 22
     buildToolsVersion "23.0.0 rc2"
-
+    defaultConfig {
+        applicationId "io.github.bunnyblue.networklog"
+    }
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
