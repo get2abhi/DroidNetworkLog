@@ -1,9 +1,12 @@
 # keystore
 *.keystore
-
+build/
+build
 # vim swp files
 *.swp
-
+*/build
+*/bin
+*/gen
 # logs
 log-*
 

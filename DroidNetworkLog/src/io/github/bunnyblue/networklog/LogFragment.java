@@ -52,7 +52,7 @@ public class LogFragment extends Fragment {
   // buffers incoming log entries
   protected LinkedList<ListItem> listDataBuffer;
   // holds all entries, used for filtering
-  protected LinkedList<ListItem> listDataUnfiltered;
+  public LinkedList<ListItem> listDataUnfiltered;
   private CustomAdapter adapter;
   private ListViewUpdater updater;
   private NetworkLog parent = null;
@@ -60,17 +60,17 @@ public class LogFragment extends Fragment {
   private boolean doNotRefresh = false;
   public boolean needsRefresh = false;
 
-  protected class ListItem {
-    protected ApplicationsTracker.AppEntry app;
-    protected String in;
-    protected String out;
-    protected String proto;
-    protected String srcAddr;
-    protected int srcPort;
-    protected String dstAddr;
-    protected int dstPort;
-    protected int len;
-    protected long timestamp;
+  public class ListItem {
+    public ApplicationsTracker.AppEntry app;
+    public String in;
+    public String out;
+    public String proto;
+    public String srcAddr;
+    public int srcPort;
+    public String dstAddr;
+    public int dstPort;
+    public int len;
+    public long timestamp;
 
     ListItem(ApplicationsTracker.AppEntry app) {
       this.app = app;

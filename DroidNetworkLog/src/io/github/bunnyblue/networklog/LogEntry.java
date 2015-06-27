@@ -7,19 +7,19 @@
 package io.github.bunnyblue.networklog;
 
 public class LogEntry {
-  int uid;
-  String uidString;
-  String in;
-  String out;
-  String proto;
-  String src;
-  String dst;
-  int len;
-  int spt;
-  int dpt;
-  long timestamp;
-  boolean validated;
-  boolean valid;
+  public int uid;
+  public  String uidString;
+  public String in;
+  public String out;
+  public String proto;
+  public String src;
+  public String dst;
+  public int len;
+  public int spt;
+  public int dpt;
+  public long timestamp;
+  public boolean validated;
+  public boolean valid;
 
   public boolean isValid() {
     if(validated) {

@@ -6,13 +6,7 @@
 
 package io.github.bunnyblue.networklog;
 
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.Enumeration;
 
-import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.app.AlertDialog;
@@ -29,11 +23,14 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,10 +38,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.ToggleButton;
+import android.widget.Toast;
 
-public class NetworkLog extends FragmentActivity {
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+
+import io.github.bunnyblue.networklog.material.NavigationDrawerFragment;
+
+public class NetworkLog extends AppCompatActivity
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
   public static RetainInstanceData data = null;
+
+  private NavigationDrawerFragment mNavigationDrawerFragment;
+  private CharSequence mTitle;
 
   public static ViewPager viewPager;
   public final static int PAGE_LOG = 0;
@@ -54,7 +63,7 @@ public class NetworkLog extends FragmentActivity {
   public static LogFragment logFragment;
   public static AppFragment appFragment;
 
-  public static ToggleButton loggingButton;
+  public  FloatingActionButton floatingActionButton;
   public static TextView statusText;
   public static Settings settings;
   public static Handler handler;
@@ -135,6 +144,32 @@ public class NetworkLog extends FragmentActivity {
   };
 
   private LogEntry entry;
+
+  @Override
+  public void onNavigationDrawerItemSelected(int position) {
+    // update the main content by replacing fragments
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    if (position==0){
+
+      if (appFragment==null) {
+        return;
+      }
+//      fragmentManager.beginTransaction()
+//              .replace(R.id.container, appFragment)
+//              .commit();
+      return;
+    }else if (position==1){
+      if (logFragment==null) {
+        return;
+      }
+//      fragmentManager.beginTransaction()
+//              .replace(R.id.container, logFragment)
+//              .commit();
+    }
+//    fragmentManager.beginTransaction()
+//            .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+//            .commit();
+  }
 
   class IncomingHandler extends Handler {
     @Override
@@ -426,10 +461,21 @@ public class NetworkLog extends FragmentActivity {
 
       setContentView(R.layout.main);
 
-		ActionBar actionBar = getActionBar();
-      actionBar.setCustomView(R.layout.actionbar_top);
-      actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_CUSTOM);
+      mNavigationDrawerFragment = (NavigationDrawerFragment)
+              getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
 
+      mTitle = getTitle();
+
+      // Set up the drawer.
+      mNavigationDrawerFragment.setUp(
+              R.id.navigation_drawer,
+              (DrawerLayout) findViewById(R.id.drawer_layout));
+
+      Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+      setSupportActionBar(toolbar);
+
+     // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
       if(history == null) {
         history = new HistoryLoader();
       }
@@ -639,34 +685,39 @@ public class NetworkLog extends FragmentActivity {
         item.setVisible(false);
       }
 
-      loggingButton = (ToggleButton) findViewById(R.id.actionbar_service_toggle);
-    loggingButton.setOnClickListener(new View.OnClickListener() {
-
+      floatingActionButton = (FloatingActionButton) findViewById(R.id.fabService);
+    floatingActionButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        serviceToggle(v);
+        if(!isServiceRunning(getBaseContext(), NetworkLogService.class.getName())) {
+          startService();
+          Toast.makeText(NetworkLog.this, "booting", Toast.LENGTH_SHORT).show();
+          //floatingActionButton.setChecked(true);
+        } else {
+          stopService();
+          Toast.makeText(NetworkLog.this, "Stoped", Toast.LENGTH_SHORT).show();
+          //floatingActionButton.setChecked(false);
+        }
+
       }
     });
-      if(isServiceRunning(this, NetworkLogService.class.getName())) {
-        loggingButton.setChecked(true);
-      } else {
-        loggingButton.setChecked(false);
-      }
+//    floatingActionButton.setOnClickListener(new View.OnClickListener() {
+//
+//      @Override
+//      public void onClick(View v) {
+//        serviceToggle(v);
+//      }
+//    });
+//      if(isServiceRunning(this, NetworkLogService.class.getName())) {
+//        floatingActionButton.setChecked(true);
+//      } else {
+//        floatingActionButton.setChecked(false);
+//      }
 
       return true;
     }
 
-  public void serviceToggle(View view) {
-    loggingButton = (ToggleButton)view;
 
-    if(!isServiceRunning(this, NetworkLogService.class.getName())) {
-      startService();
-      loggingButton.setChecked(true);
-    } else {
-      stopService();
-      loggingButton.setChecked(false);
-    }
-  }
 
   @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DroidNetworkLog.iml" filepath="$PROJECT_DIR$/DroidNetworkLog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DroidNetworkLog/DroidNetworkLog-DroidNetworkLog.iml" filepath="$PROJECT_DIR$/DroidNetworkLog/DroidNetworkLog-DroidNetworkLog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FileSelector/FileSelector.iml" filepath="$PROJECT_DIR$/FileSelector/FileSelector.iml" />
+    </modules>
+  </component>
+</project>

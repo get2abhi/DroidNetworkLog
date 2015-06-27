@@ -39,12 +39,12 @@ import java.lang.Runnable;
 
 public class NetworkLogService extends Service {
   ArrayList<Messenger> clients = new ArrayList<Messenger>();
-  static final int NOTIFICATION_ID = "Network Log".hashCode();
-  static final int MSG_REGISTER_CLIENT     = 1;
-  static final int MSG_UNREGISTER_CLIENT   = 2;
-  static final int MSG_UPDATE_NOTIFICATION = 3;
-  static final int MSG_BROADCAST_LOG_ENTRY = 4;
-  static final int MSG_TOGGLE_FOREGROUND   = 5;
+  public static final int NOTIFICATION_ID = "Network Log".hashCode();
+  public static final int MSG_REGISTER_CLIENT     = 1;
+  public static final int MSG_UNREGISTER_CLIENT   = 2;
+  public static final int MSG_UPDATE_NOTIFICATION = 3;
+  public static final int MSG_BROADCAST_LOG_ENTRY = 4;
+  public static final int MSG_TOGGLE_FOREGROUND   = 5;
   final Messenger messenger = new Messenger(new IncomingHandler(this));
   boolean has_root = false;
   boolean has_binaries = false;
@@ -409,10 +409,10 @@ public class NetworkLogService extends Service {
       stopForeground();
 
       ThroughputTracker.stopUpdater();
-
-      if(NetworkLog.loggingButton != null) {
-        NetworkLog.loggingButton.setChecked(false);
-      }
+//TODO
+//      if(NetworkLog.floatingActionButton != null) {
+//        NetworkLog.floatingActionButton.setChecked(false);
+//      }
 
       if(has_root && has_binaries) {
         stopLogging();

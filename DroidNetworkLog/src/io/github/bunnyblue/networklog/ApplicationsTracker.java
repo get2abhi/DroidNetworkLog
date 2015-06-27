@@ -44,11 +44,11 @@ public class ApplicationsTracker {
   public static Drawable loading_icon = null;
 
   public static class AppEntry {
-    String name;
-    String nameLowerCase;
-    String packageName;
-    int uid;
-    String uidString;
+    public  String name;
+    public  String nameLowerCase;
+    public  String packageName;
+    public  int uid;
+    public  String uidString;
 
     public String toString() {
       return "(" + uidString + ") " + name;
