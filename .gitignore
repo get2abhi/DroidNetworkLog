@@ -2,6 +2,7 @@
 *.keystore
 build/
 build
+.gradle
 # vim swp files
 *.swp
 */build

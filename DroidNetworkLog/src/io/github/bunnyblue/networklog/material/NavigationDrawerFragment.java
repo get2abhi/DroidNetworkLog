@@ -105,9 +105,10 @@ public class NavigationDrawerFragment extends Fragment {
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
                 new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
+                        getString(R.string.draw_item_Apps),
+                        getString(R.string.draw_item_Dev),
+                        getString(R.string.draw_item_setting_table),
+                        getString(R.string.draw_item_setup_apps),
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -136,47 +137,6 @@ public class NavigationDrawerFragment extends Fragment {
 //        actionBar.setHomeButtonEnabled(true);
         mDrawerToggle=new ActionBarDrawerToggle(getActivity(),mDrawerLayout,(Toolbar)getActivity().findViewById(R.id.toolbar),R.string.navigation_drawer_open,R.string.navigation_drawer_close);
 
-        // ActionBarDrawerToggle ties together the the proper interactions
-        // between the navigation drawer and the action bar app icon.
-//        mDrawerToggle = new ActionBarDrawerToggle(
-//                getActivity(),                    /* host Activity */
-//                mDrawerLayout,                    /* DrawerLayout object */
-//                R.drawable.ic_drawer,             /* nav drawer image to replace 'Up' caret */
-//                R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
-//                R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
-//        ) {
- //           @Override
-//            public void onDrawerClosed(View drawerView) {
-//                super.onDrawerClosed(drawerView);
-//                if (!isAdded()) {
-//                    return;
-//                }
-//
-//                getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
-//            }
-
-  //          @Override
-//            public void onDrawerOpened(View drawerView) {
-//                super.onDrawerOpened(drawerView);
-//                if (!isAdded()) {
-//                    return;
-//                }
-//
-//                if (!mUserLearnedDrawer) {
-//                    // The user manually opened the drawer; store this flag to prevent auto-showing
-//                    // the navigation drawer automatically in the future.
-//                    mUserLearnedDrawer = true;
-//                    SharedPreferences sp = PreferenceManager
-//                            .getDefaultSharedPreferences(getActivity());
-//                    sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
-//                }
-//
-//                getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
-//            }
- //       };
-
-        // If the user hasn't 'learned' about the drawer, open it to introduce them to the drawer,
-        // per the navigation drawer design guidelines.
         if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
             mDrawerLayout.openDrawer(mFragmentContainerView);
         }

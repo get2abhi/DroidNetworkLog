@@ -281,8 +281,9 @@
   <string name="draw_item_log">Log</string>
   <string name="draw_item_Apps">Apps</string>
   <string name="draw_item_Dev">DevApps</string>
+  <string name="draw_item_setting_table">Custom Host Table</string>
   <string name="draw_item_monitor_toggle">Tog</string>
-
+  <string name="draw_item_setup_apps">Setup Apps</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -290,4 +291,10 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_main2">Main2Activity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_sub_app_manger">SubAppMangerActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

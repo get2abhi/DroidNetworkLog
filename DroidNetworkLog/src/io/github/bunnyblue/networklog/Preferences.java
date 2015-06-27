@@ -36,9 +36,9 @@ public class Preferences extends PreferenceActivity implements OnPreferenceClick
     boolean clearlog_dialog_showing;
     boolean clearlog_progress_dialog_showing;
     boolean selectToastApps_dialog_showing;
-    ArrayList<AppsSelector.AppItem> selectToastApps_appData;
+    ArrayList<AppItem> selectToastApps_appData;
     boolean selectBlockedApps_dialog_showing;
-    ArrayList<AppsSelector.AppItem> selectBlockedApps_appData;
+    ArrayList<AppItem> selectBlockedApps_appData;
 
     InstanceData() {
       history_dialog_showing = NetworkLog.history.dialog_showing;

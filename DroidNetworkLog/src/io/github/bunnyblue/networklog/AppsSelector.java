@@ -11,7 +11,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,13 +22,12 @@ import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,12 +45,7 @@ public abstract class AppsSelector
   AlertDialog dialog;
   String name;
 
-  class AppItem {
-    Drawable icon;
-    String name;
-    String packageName;
-    boolean enabled;
-  }
+
 
   protected abstract File getSaveFile(Context context);
   protected abstract void negativeButton();

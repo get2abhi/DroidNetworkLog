@@ -47,6 +47,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 
 import io.github.bunnyblue.networklog.material.NavigationDrawerFragment;
+import io.github.bunnyblue.networklog.sub.SubAppMangerActivity;
 
 public class NetworkLog extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -165,6 +166,9 @@ public class NetworkLog extends AppCompatActivity
 //      fragmentManager.beginTransaction()
 //              .replace(R.id.container, logFragment)
 //              .commit();
+    }else if (position==3){
+      startActivity(new Intent(this, SubAppMangerActivity.class));
+
     }
 //    fragmentManager.beginTransaction()
 //            .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
